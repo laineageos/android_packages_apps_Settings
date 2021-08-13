@@ -275,4 +275,9 @@
     <!-- Disable DNS for VPN -->
     <string name="vpn_enforce_dns_title">Disable for VPN</string>
     <string name="vpn_enforce_dns_summary">Disable the private DNS when connected to a VPN and restore upon disconnecting</string>
+
+    <!-- Gesture navbar length -->
+    <string name="gesture_navbar_length_title">Pill length</string>
+    <string name="short_label">Short</string>
+    <string name="long_label">Long</string>
 </resources>
