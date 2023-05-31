@@ -249,4 +249,8 @@
     <string name="private_dns_mode_cloudflare_block_malware_and_adult_content" translatable="false">Cloudflare Block Malware and Adult Content DNS</string>
     <!-- Cloudflare Block Malware and Adult Content DNS hostname -->
     <string name="private_dns_hostname_cloudflare_block_malware_and_adult_content" translatable="false">family.cloudflare-dns.com</string>
+
+    <!-- Hide developer status -->
+    <string name="hide_developer_status_title">Hide developer status</string>
+    <string name="hide_developer_status_summary">Hide developer status from apps</string>
 </resources>
