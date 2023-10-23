@@ -58,6 +58,7 @@ import java.util.List;
 public class PrivateDnsPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
     private static final String KEY_PRIVATE_DNS_SETTINGS = "private_dns_settings";
+    private static final String KEY_ENFORCE_VPN_SETTINGS = "vpn_enforce_dns";
 
     private static final Uri[] SETTINGS_URIS = new Uri[]{
         Settings.Global.getUriFor(PRIVATE_DNS_MODE),
@@ -77,11 +78,13 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
     private static final int PRIVATE_DNS_MODE_QUAD9_ECS = 12;
     private static final int PRIVATE_DNS_MODE_QUAD9_UNSECURED_ECS = 13;
     private static final int PRIVATE_DNS_MODE_COMSS = 14;
+
     private final Handler mHandler;
     private final ContentObserver mSettingsObserver;
     private final ConnectivityManager mConnectivityManager;
     private LinkProperties mLatestLinkProperties;
     private Preference mPreference;
+    private Preference mEnforcePreference;
 
     public PrivateDnsPreferenceController(Context context) {
         super(context, KEY_PRIVATE_DNS_SETTINGS);
@@ -110,6 +113,7 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
         super.displayPreference(screen);
 
         mPreference = screen.findPreference(getPreferenceKey());
+        mEnforcePreference = screen.findPreference(KEY_ENFORCE_VPN_SETTINGS);
     }
 
     @Override
@@ -206,7 +210,11 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(!isManagedByAdmin());
+        final boolean isManaged = isManagedByAdmin();
+        preference.setEnabled(!isManaged);
+        if (mEnforcePreference == null) return;
+        final int mode = ConnectivitySettingsManager.getPrivateDnsMode(mContext);
+        mEnforcePreference.setEnabled(!isManaged && mode != PRIVATE_DNS_MODE_OFF);
     }
 
     private boolean isManagedByAdmin() {

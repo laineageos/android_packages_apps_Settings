@@ -348,7 +348,6 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
                         context.getString(R.string.private_dns_hostname_comss);
                 ConnectivitySettingsManager.setPrivateDnsHostname(context, comssHostname);
                 modeToSet = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
-
             }
 
             FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(context,
