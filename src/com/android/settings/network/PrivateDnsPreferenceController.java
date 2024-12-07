@@ -77,7 +77,6 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
     private static final int PRIVATE_DNS_MODE_QUAD9_ECS = 12;
     private static final int PRIVATE_DNS_MODE_QUAD9_UNSECURED_ECS = 13;
     private static final int PRIVATE_DNS_MODE_COMSS = 14;
-
     private final Handler mHandler;
     private final ContentObserver mSettingsObserver;
     private final ConnectivityManager mConnectivityManager;
@@ -143,6 +142,8 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
             case PRIVATE_DNS_MODE_OFF:
                 return res.getString(com.android.settingslib.R.string.private_dns_mode_off);
             case PRIVATE_DNS_MODE_CLOUDFLARE:
+            case PRIVATE_DNS_MODE_CLOUDFLARE_BLOCK_MALWARE:
+            case PRIVATE_DNS_MODE_CLOUDFLARE_BLOCK_MALWARE_AND_ADULT_CONTENT:
             case PRIVATE_DNS_MODE_ADGUARD:
             case PRIVATE_DNS_MODE_OPEN_DNS:
             case PRIVATE_DNS_MODE_CLEANBROWSING:
@@ -164,6 +165,10 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
                         ConnectivitySettingsManager.getPrivateDnsHostname(mContext);
                 final String cloudflareHostname =
                         res.getString(R.string.private_dns_hostname_cloudflare);
+                final String cloudflareblockmalwareHostname =
+                        res.getString(R.string.private_dns_hostname_cloudflare_block_malware);
+                final String cloudflareblockmalwaresndsdultcontentHostname =
+                        res.getString(R.string.private_dns_hostname_cloudflare_block_malware_and_adult_content);
                 final String adguardHostname =
                         res.getString(R.string.private_dns_hostname_adguard);
                 final String opendnsHostname =
